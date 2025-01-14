@@ -9,3 +9,6 @@ npm run start:dev
 
 # To open swagger doumentation use
 http://localhost:4000/api or {{ base_url }}/api
+
+# To run all tests use
+npm run test

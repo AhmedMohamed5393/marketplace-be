@@ -15,7 +15,7 @@
     "start:prod": "node dist/main",
     "lint": "eslint \"{src,apps,libs,test,db}/**/*.ts\" --fix",
     "ts-check": "tsc --build tsconfig.json --force",
-    "test": "jest",
+    "test": "jest --config jest.config.js",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
@@ -91,6 +91,7 @@
       "**/*.(t|j)s"
     ],
     "coverageDirectory": "../coverage",
+    "preset": "ts-jest",
     "testEnvironment": "node"
   }
 }
