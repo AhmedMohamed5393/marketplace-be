@@ -14,6 +14,7 @@ import {
 import { SuccessClass } from '@shared/classes/success.class';
 import { LoginDto, RegisterDto } from './dto/index.dto';
 import { AuthService } from './auth.service';
+import { loginUserResponse, registerUserResponse } from '@shared/constants/users-examples.constant';
 
 @ApiTags('auth')
 @UseInterceptors(ClassSerializerInterceptor)
@@ -22,7 +23,11 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @ApiOperation({ summary: 'Register a new user' }) // Description of the endpoint
-  @ApiResponse({ status: 201, description: 'user is registered successfully' }) // Response example
+  @ApiResponse({
+    status: 201,
+    description: 'user is registered successfully',
+    example: registerUserResponse,
+  })
   @ApiBody({ type: RegisterDto }) // Specify the request body type
   @Post('signup')
   async signup(@Body() registerDto: RegisterDto): Promise<SuccessClass> {
@@ -31,7 +36,11 @@ export class AuthController {
   }
 
   @ApiOperation({ summary: 'Login an existing user' })
-  @ApiResponse({ status: 200, description: 'user is logged in successfully' })
+  @ApiResponse({
+    status: 201,
+    description: 'user is logged in successfully',
+    example: loginUserResponse,
+  })
   @ApiBody({ type: LoginDto }) // Use the alias here
   @Post('login')
   async login(@Body() loginDto: LoginDto): Promise<SuccessClass> {

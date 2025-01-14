@@ -31,6 +31,7 @@ import { AuthenticatedUser } from '@shared/decorators/index.decorator';
 import { Roles } from '@shared/decorators/index.decorator';
 import { AuthGuard, RolesGuard } from '@shared/guards/index.guard';
 import { AuthTypeEnum } from '@shared/enums/index.enum';
+import { createProductResponse, deleteProductResponse, findProductDetailsResponse, findProductsListResponse, updateProductResponse } from '@shared/constants/products-examples.constant';
 
 const { ADMIN } = AuthTypeEnum;
 
@@ -46,7 +47,11 @@ export class ProductController {
   @ApiOperation({ summary: 'Create a new product' })
   @ApiUnauthorizedResponse({ description: 'Unauthorized' })
   @ApiForbiddenResponse({ description: 'Forbidden resource' })
-  @ApiResponse({ status: 201, description: 'Product is created successfully' })
+  @ApiResponse({
+    status: 201,
+    description: 'Product is created successfully',
+    example: createProductResponse,
+  })
   @ApiBody({ type: AddDto })
   @Post('/')
   async addProduct(
@@ -58,7 +63,11 @@ export class ProductController {
   }
 
   @ApiOperation({ summary: 'Get all products' })
-  @ApiResponse({ status: 200, description: 'List of products retrieved successfully' })
+  @ApiResponse({
+    status: 200,
+    description: 'List of products retrieved successfully',
+    example: findProductsListResponse,
+  })
   @ApiQuery({ type: PageOptionsDto })
   @Get('/')
   async getProducts(@Query() pageOptionsDto: PageOptionsDto): Promise<SuccessClass> {
@@ -67,7 +76,11 @@ export class ProductController {
   }
 
   @ApiOperation({ summary: 'Get a product by ID' })
-  @ApiResponse({ status: 200, description: 'Product retrieved successfully' })
+  @ApiResponse({
+    status: 200,
+    description: 'Product retrieved successfully',
+    example: findProductDetailsResponse,
+  })
   @ApiParam({ name: 'id', type: Number, description: 'Product ID' })
   @Get('/:id')
   async getProductById(@Param('id', ParseIntPipe) id: number): Promise<SuccessClass> {
@@ -80,7 +93,11 @@ export class ProductController {
   @ApiOperation({ summary: 'Update a product by ID' })
   @ApiUnauthorizedResponse({ description: 'Unauthorized' })
   @ApiForbiddenResponse({ description: 'Forbidden resource' })
-  @ApiResponse({ status: 200, description: 'Product is updated successfully' })
+  @ApiResponse({
+    status: 200,
+    description: 'Product is updated successfully',
+    example: updateProductResponse,
+  })
   @ApiParam({ name: 'id', type: Number, description: 'Product ID' })
   @ApiBody({ type: EditDto })
   @Put('/:id')
@@ -98,7 +115,11 @@ export class ProductController {
   @ApiOperation({ summary: 'Delete a product by ID' })
   @ApiUnauthorizedResponse({ description: 'Unauthorized' })
   @ApiForbiddenResponse({ description: 'Forbidden resource' })
-  @ApiResponse({ status: 200, description: 'Product is deleted successfully' })
+  @ApiResponse({
+    status: 200,
+    description: 'Product is deleted successfully',
+    example: deleteProductResponse,
+  })
   @ApiParam({ name: 'id', type: Number, description: 'Product ID' })
   @Delete('/:id')
   async deleteProduct(
